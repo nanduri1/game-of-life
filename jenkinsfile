@@ -1,0 +1,15 @@
+node {
+    stage('SCM') {
+    git 'https://github.com/nanduri1/game-of-life.git'
+    }
+
+    stage('Build & package') {
+        sh 'mvn package'
+    }
+    
+    stage('Result') {
+    archive 'gameoflife-web/target/gameoflife.war'
+    junit 'gameoflife-web/target/surefire-reports/*.xml'
+
+    }
+}
